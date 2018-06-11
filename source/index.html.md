@@ -11,7 +11,8 @@ language_tabs: # must be one of https://git.io/vQNgJ
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
-  - <a href='https://thebongo.co.za/'>BongoTel</a>
+  - <a href='https://thebongo.zone/'>BongoTel</a>
+  - <a href='https://secure.imogo.co.za/'>IMOGO Platform Login</a>
 
 includes:
   - authentication
