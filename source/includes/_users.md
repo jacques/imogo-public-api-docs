@@ -1,3 +1,5 @@
+# Users
+
 ## Create a customer
 
 ```shell
