@@ -16,6 +16,7 @@ toc_footers:
 
 includes:
   - authentication
+  - users
   - bongotel
   - errors
 
