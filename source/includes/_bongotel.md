@@ -24,7 +24,7 @@ This endpoint recharges the users BongoTel Dialer account with the value in cent
 
 ### HTTP Request
 
-`POST https://127.0.0.1.xip.io/api/v1/users`
+`POST https://127.0.0.1.xip.io/api/v1/bongotel/recharge`
 
 ### JSON Payload Parameters
 
