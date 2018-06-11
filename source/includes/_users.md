@@ -20,6 +20,7 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/users"
   }
 }
 ```
+
 This endpoint creates a new customer on the Plutus Platform.  During the process a wallet and BongoTel dialler is created for the customer.
 
 ### HTTP Request
