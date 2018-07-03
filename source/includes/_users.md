@@ -6,7 +6,7 @@
 curl -X POST "https://127.0.0.1.xip.io/api/v1/users"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
-  -d '{"first_name":"CHERYL","last_name":"SERFONTEIN","id_type":"ZAID","id_document_number":"7001010101081","email_address":"cheryl@imogo.co.za","mobile_number":"08012345679"}'
+  -d '{"first_name":"CHERYL","last_name":"SERFONTEIN","email_address":"cheryl@imogo.co.za","mobile_number":"08012345679"}'
 ```
 
 > The above command returns JSON structured like this:
@@ -21,12 +21,55 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/users"
 }
 ```
 
-This endpoint creates a new customer on the Plutus Platform.  During the process a wallet and BongoTel dialler is created for the customer.
+This endpoint creates a new customer on the BongoTel Platform.  During the
+registration process a wallet is issued to the customer and BongoTel dialer
+account is created for the customer.  The customer is setup for R 5000/day /
+R 25000/month to send forex home with BongoTel as part of Exemption 17.
 
 ### HTTP Request
 
 `POST https://127.0.0.1.xip.io/api/v1/users`
 
+### JSON Payload Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+first_name | string (64) | First names of the user
+last_name | string (64) | Surname of the user
+id_type | string | Identification Document Type (ZAID == South African ID / PASSPORT = Passport / ZAASYLUM = South African Asylum Document)
+id_document_number | string (32) | The document number for the given identification type
+mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +)
+email_address | string(64) | Email address of the user
+key_field | varchar(32) | Your key field for the user (i.e. user id on your system)
+
+## Lookup a customer
+
+```shell
+curl -X POST "https://127.0.0.1.xip.io/api/v1/users/search"
+  -H "Authorization: Token token=YOURTOKEN"
+  -H "Content-Type: application/json"
+  -d '{"email_address":"cheryl@imogo.co.za","mobile_number":"08012345679"}'
+```
+
+### JSON Payload Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+id_type | string | Identification Document Type (ZAID == South African ID / PASSPORT = Passport / ZAASYLUM = South African Asylum Document)
+id_document_number | string (32) | The document number for the given identification type
+mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +)
+email_address | string(64) | Email address of the user
+
+## Update a customer
+
+```shell
+curl -X POST "https://127.0.0.1.xip.io/api/v1/users/<USER>"
+  -H "Authorization: Token token=YOURTOKEN"
+  -H "Content-Type: application/json"
+  -d '{"first_name":"CHERYL","last_name":"SERFONTEIN","email_address":"cheryl@imogo.co.za","mobile_number":"08012345679"}'
+```
+
+`POST https://127.0.0.1.xip.io/api/v1/users`
 
 ### JSON Payload Parameters
 
