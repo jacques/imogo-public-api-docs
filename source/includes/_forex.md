@@ -50,18 +50,11 @@ last_name | string (64) | Surname of the user (needs to be in CAPITALS for the j
 ## Create Forex Recipient
 
 ```shell
-curl -X POST "https://127.0.0.1.xip.io/api/v1/forex"
+curl -X POST "https://127.0.0.1.xip.io/api/v1/forex/<MSISDN>/recipients"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
-  -d '{""}'
+  -d '{"first_name":"TIMOTHY","middle_name":"MICHAEL","last_name":"COLMAN","mobile_number":"27802345678","country":"BDT","account_number":"123456","swift_code":"DBBLBDDH102"}'
 ```
-
-This endpoint retrieves a collection of recipients for sending forex to.  These users have been
-added as recipients for the user.
-
-### HTTP Request
-
-`POST https://127.0.0.1.xip.io/api/v1/forex/recipients`
 
 > The above command returns JSON structured like this:
 
@@ -71,23 +64,36 @@ added as recipients for the user.
   "details":[
     {
       "uuid":"72d11c48-a565-4731-8915-462084ee0a9f",
-      "first_name":"Timothy",
-      "middle_name":"Michael",
-      "last_name":"Colman"
     }
   ]
 }
 ```
 
+This endpoint retrieves a collection of recipients for sending forex to.  These users have been
+added as recipients for the user.
+
+### HTTP Request
+
+`POST https://127.0.0.1.xip.io/api/v1/forex/<MSISDN>/recipients`
+
+### Response Result Set
+
+Parameter | Type | Description
+--------- | ---- | -----------
+uuid | string (36) | UUID of the recipient
+first_name | string (64) | First names of the user (needs to be in CAPITALS for the juristic person)
+middle_name | string (64) | Middle name of the user (needs to be in CAPITALS for the juristic person)
+last_name | string (64) | Surname of the user (needs to be in CAPITALS for the juristic person)
+
+
 ## Request Quote (before sending money)
 
 ```shell
-curl -X GET "https://127.0.0.1.xip.io/api/v1/users/c3797604-6e78-486e-be5d-433f80cc4993/forex"
+curl -X POST "https://127.0.0.1.xip.io/api/v1/forex/deals/quote"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
+  -d '{"mobile_number":"27801234567","recipient_uuid":"72d11c48-a565-4731-8915-462084ee0a9f","amount":"500000"}'
 ```
-
-This endpoint is used to request a quotation to send forex to the specified recipient.
 
 > The above command returns JSON structured like this:
 
@@ -108,22 +114,36 @@ This endpoint is used to request a quotation to send forex to the specified reci
 }
 ```
 
+This endpoint is used to request a quotation to send forex to the specified recipient.
+
 ### HTTP Request
 
 `POST https://127.0.0.1.xip.io/api/v1/mobile/users/<USER>/forex/deals/quote`
+
+### JSON Payload Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +) sending the forex
+recipient_uuid | string(36) | UUID of the receipient you to be sent forex
 
 ### Response Result Set
 
 Parameter | Type | Description
 --------- | ---- | -----------
+quote | string (36) | UUID of the quote
+send.currency | string (3) | Currency code for currency sending from
+send.amount | integer | Amount in cents to quote on
+receive.currency | string (3) | Currency code for currency being sent to
+receive.amount | integer | Amount in cents to receive if quote acepted
 
 ## Accept Quote (to send money)
 
 ```shell
-curl -X POST "https://127.0.0.1.xip.io/api/v1/users"
+curl -X POST "https://127.0.0.1.xip.io/api/v1/forex/deals/accept"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
-  -d '{"mobile_number":"0801234567","quote":"
+  -d '{"mobile_number":"0801234567","quote":"c3d820ba-ac36-437d-b916-c1dc8833ad80"}
 ```
 
 > The above command returns JSON structured like this:
@@ -150,3 +170,9 @@ Parameter | Type | Description
 --------- | ---- | -----------
 mobile_number | integer | Mobile Number of the Sender
 quote | string(36) | UUID of the quotation
+
+### Response Result Set
+
+Parameter | Type | Description
+--------- | ---- | -----------
+uuid | string (36) | UUID of the accepted deal
