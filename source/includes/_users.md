@@ -51,6 +51,26 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/users/search"
   -d '{"email_address":"cheryl@imogo.co.za","mobile_number":"08012345679"}'
 ```
 
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "ok",
+  "details": [
+    {
+       "first_name": "CHERYL",
+       "last_name": "SERFONTEIN",
+       "email_address": "cheryl@imogo.co.za",
+       "mobile_number": "08012345679"
+    }
+  ]
+}
+```
+
+### HTTP Request
+
+`POST https://127.0.0.1.xip.io/api/v1/users/search`
+
 ### JSON Payload Parameters
 
 Parameter | Type | Description
@@ -59,6 +79,7 @@ id_type | string | Identification Document Type (ZAID == South African ID / PASS
 id_document_number | string (32) | The document number for the given identification type
 mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +)
 email_address | string(64) | Email address of the user
+key_field | varchar(32) | Your key field for the user (i.e. user id on your system)
 
 ## Update a customer
 
@@ -69,7 +90,24 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/users/<USER>"
   -d '{"first_name":"CHERYL","last_name":"SERFONTEIN","email_address":"cheryl@imogo.co.za","mobile_number":"08012345679"}'
 ```
 
-`POST https://127.0.0.1.xip.io/api/v1/users`
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "ok",
+  "message": "Customer updated successfully."
+}
+```
+
+### HTTP Request
+
+`POST https://127.0.0.1.xip.io/api/v1/users/<USER>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+USER | The UUID of the user to update
 
 ### JSON Payload Parameters
 
