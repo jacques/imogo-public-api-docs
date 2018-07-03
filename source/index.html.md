@@ -18,6 +18,7 @@ includes:
   - authentication
   - users
   - bongotel
+  - forex
   - errors
 
 search: true
