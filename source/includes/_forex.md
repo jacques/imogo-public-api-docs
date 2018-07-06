@@ -20,7 +20,7 @@ added as recipients for the user.
 
 ### HTTP Request
 
-`GET https://127.0.0.1.xip.io/api/v1/forex/recipients`
+`GET https://127.0.0.1.xip.io/users/<USER>/forex/recipients`
 
 > The above command returns JSON structured like this:
 
@@ -37,6 +37,13 @@ added as recipients for the user.
   ]
 }
 ```
+
+### JSON Payload Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+store_id | integer | Store ID
+till_id | integer | Till Id (i.e. Lane 1 == Till 1)
 
 ### Response Result Set
 
@@ -76,6 +83,13 @@ added as recipients for the user.
 
 `POST https://127.0.0.1.xip.io/api/v1/forex/<MSISDN>/recipients`
 
+### JSON Payload Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+store_id | integer | Store ID
+till_id | integer | Till Id (i.e. Lane 1 == Till 1)
+
 ### Response Result Set
 
 Parameter | Type | Description
@@ -84,7 +98,6 @@ uuid | string (36) | UUID of the recipient
 first_name | string (64) | First names of the user (needs to be in CAPITALS for the juristic person)
 middle_name | string (64) | Middle name of the user (needs to be in CAPITALS for the juristic person)
 last_name | string (64) | Surname of the user (needs to be in CAPITALS for the juristic person)
-
 
 ## Request Quote (before sending money)
 
@@ -125,7 +138,9 @@ This endpoint is used to request a quotation to send forex to the specified reci
 Parameter | Type | Description
 --------- | ---- | -----------
 mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +) sending the forex
-recipient_uuid | string(36) | UUID of the receipient you to be sent forex
+recipient_uuid | string(36) | UUID of the recipient you to be sent forex
+store_id | integer | Store ID
+till_id | integer | Till Id (i.e. Lane 1 == Till 1)
 
 ### Response Result Set
 
@@ -135,7 +150,7 @@ quote | string (36) | UUID of the quote
 send.currency | string (3) | Currency code for currency sending from
 send.amount | integer | Amount in cents to quote on
 receive.currency | string (3) | Currency code for currency being sent to
-receive.amount | integer | Amount in cents to receive if quote acepted
+receive.amount | integer | Amount in cents to receive if quote accepted
 
 ## Accept Quote (to send money)
 
@@ -143,7 +158,7 @@ receive.amount | integer | Amount in cents to receive if quote acepted
 curl -X POST "https://127.0.0.1.xip.io/api/v1/forex/deals/accept"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
-  -d '{"mobile_number":"0801234567","quote":"c3d820ba-ac36-437d-b916-c1dc8833ad80"}
+  -d '{"mobile_number":"0801234567","quote":"c3d820ba-ac36-437d-b916-c1dc8833ad80"}'
 ```
 
 > The above command returns JSON structured like this:
@@ -162,7 +177,7 @@ execution of the forex deal.
 
 ### HTTP Request
 
-`POST https://127.0.0.1.xip.io/api/v1/mobile/users/<USER>/forex/deals/accept`
+`POST https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/accept`
 
 ### JSON Payload Parameters
 
@@ -170,6 +185,8 @@ Parameter | Type | Description
 --------- | ---- | -----------
 mobile_number | integer | Mobile Number of the Sender
 quote | string(36) | UUID of the quotation
+store_id | integer | Store ID
+till_id | integer | Till Id (i.e. Lane 1 == Till 1)
 
 ### Response Result Set
 
