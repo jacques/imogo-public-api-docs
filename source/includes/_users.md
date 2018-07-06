@@ -32,17 +32,24 @@ R 25000/month to send forex home with BongoTel as part of Exemption 17.
 
 ### JSON Payload Parameters
 
+Parameter | Type | Required | Description
+--------- | ---- | -------- | -----------
+first_name | string (64) | true | First names of the user
+last_name | string (64) | true | Surname of the user
+id_type | string | false | Identification Document Type (ZAID == South African ID / PASSPORT = Passport / ZAASYLUM = South African Asylum Document)
+id_document_number | string (32) | false | The document number for the given identification type
+mobile_number | integer | true | MSISDN for the user in E.164 format (minus the leading +)
+email_address | string(64) | true | Email address of the user
+key_field | varchar(32) | false | Your key field for the user (i.e. user id on your system)
+store_id | integer | true | Store ID
+till_id | integer | true | Till Id (i.e. Lane 1 == Till 1)
+
+### Response Result Set
+
 Parameter | Type | Description
 --------- | ---- | -----------
-first_name | string (64) | First names of the user
-last_name | string (64) | Surname of the user
-id_type | string | Identification Document Type (ZAID == South African ID / PASSPORT = Passport / ZAASYLUM = South African Asylum Document)
-id_document_number | string (32) | The document number for the given identification type
-mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +)
-email_address | string(64) | Email address of the user
-key_field | varchar(32) | Your key field for the user (i.e. user id on your system)
-store_id | integer | Store ID
-till_id | integer | Till Id (i.e. Lane 1 == Till 1)
+uuid | string (36) | UUID of the user that was created
+account_number | interger | BongoTel Wallet Account Number
 
 ## Lookup a customer
 
@@ -81,9 +88,23 @@ id_type | string | Identification Document Type (ZAID == South African ID / PASS
 id_document_number | string (32) | The document number for the given identification type
 mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +)
 email_address | string(64) | Email address of the user
-key_field | varchar(32) | Your key field for the user (i.e. user id on your system)
+key_field | string (32) | Your key field for the user (i.e. user id on your system)
 store_id | integer | Store ID
 till_id | integer | Till Id (i.e. Lane 1 == Till 1)
+
+### Response Result Set
+
+Parameter | Type | Description
+--------- | ---- | -----------
+uuid | string (36) | UUID of the user that was created
+first_name | string (64) | true | First names of the user
+last_name | string (64) | true | Surname of the user
+id_type | string | Identification Document Type (ZAID == South African ID / PASSPORT = Passport / ZAASYLUM = South African Asylum Document)
+id_document_number | string (32) | The document number for the given identification type
+mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +)
+email_address | string(64) | Email address of the user
+fica_status | integer | 0 == Not FICA'd / Exemption 17 | 1 == (POID on File) | 2 == Full FICA (POID and POA on File)
+key_field | string (32) | Your key field for the user (i.e. user id on your system)
 
 ## Update a customer
 
