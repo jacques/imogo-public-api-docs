@@ -6,7 +6,7 @@
 curl -X POST "https://127.0.0.1.xip.io/api/v1/bongotel/recharge"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
-  -d '{"amount":"10000","mobile_number":"08012345679"}'
+  -d '{"amount":"10000","mobile_number":"08012345679","store_id":"12345678901","till_id":"1"}'
 ```
 
 > The above command returns JSON structured like this:
@@ -32,3 +32,5 @@ Parameter | Type | Description
 --------- | ---- | -----------
 amount | integer | The amount in cents to load to the users BongoTel Dialer
 mobile_number | integer | MSISDN for the user in E.164 format (minus the leading +)
+store_id | integer | Store ID
+till_id | integer | Till Id (i.e. Lane 1 == Till 1)
