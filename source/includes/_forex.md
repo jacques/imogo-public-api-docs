@@ -152,7 +152,49 @@ send.amount | integer | Amount in cents to quote on
 receive.currency | string (3) | Currency code for currency being sent to
 receive.amount | integer | Amount in cents to receive if quote accepted
 
-## Accept Quote (to send money)
+## Accept Quote (first confirmation)
+
+```shell
+curl -X POST "https://127.0.0.1.xip.io/api/v1/forex/deals/accept"
+  -H "Authorization: Token token=YOURTOKEN"
+  -H "Content-Type: application/json"
+  -d '{"mobile_number":"0801234567","quote":"c3d820ba-ac36-437d-b916-c1dc8833ad80","otp":"123456"}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "ok",
+  "details": {
+    "uuid": "e70c34d5-1a89-452f-b8b3-12be4c022ef0"
+  }
+}
+```
+
+This endpoint accepts the quote.  Requires confirmation.
+
+### HTTP Request
+
+`POST https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/accept`
+
+### JSON Payload Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+mobile_number | integer | Mobile Number of the Sender
+otp | string(6) | OTP that was sent to the customer to accept quote (before confirmation)
+quote | string(36) | UUID of the quotation
+store_id | integer | Store ID
+till_id | integer | Till Id (i.e. Lane 1 == Till 1)
+
+### Response Result Set
+
+Parameter | Type | Description
+--------- | ---- | -----------
+uuid | string (36) | UUID of the accepted deal
+
+## Confirm Accept Quote (to actually send money)
 
 ```shell
 curl -X POST "https://127.0.0.1.xip.io/api/v1/forex/deals/accept"
@@ -172,12 +214,12 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/forex/deals/accept"
 }
 ```
 
-This endpoint accepts the quote and creates the forex deal and moves money for
+This endpoint confirms the acceptance of the quote and creates the forex deal and moves money for
 execution of the forex deal.
 
 ### HTTP Request
 
-`POST https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/accept`
+`POST https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/confirm`
 
 ### JSON Payload Parameters
 
