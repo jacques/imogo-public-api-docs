@@ -16,6 +16,8 @@ includes:
   - authentication
   - users
   - bongotel
+  - airtime
+  - electricity
   - forex
   - errors
 
