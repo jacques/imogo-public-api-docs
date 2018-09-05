@@ -1,11 +1,8 @@
 # BongoTel Forex
 
- * Destination countries for Forex:
-    - Bangladesh (BD)
-    - Botswana (BW)
-    - Malawi (MW)
-    - Mozambique (MZ)
-    - Zimbabwe (ZW)
+Support for delivery of forex worldwide via IMOGO.
+
+Tim can you confirm which countries we are unable to send money to?
 
 ## List Forex Recipients
 
@@ -60,7 +57,7 @@ last_name | string (64) | Surname of the user (needs to be in CAPITALS for the j
 curl -X POST "https://127.0.0.1.xip.io/api/v1/users/<USERS>/forex/recipients"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
-  -d '{"first_name":"TIMOTHY","middle_name":"MICHAEL","last_name":"COLMAN","mobile_number":"27802345678","country":"BD","account_number":"123456","swift_code":"DBBLBDDH102"}'
+  -d '{"first_name":"TIMOTHY","last_name":"COLMAN","mobile_number":"27802345678","country":"BD","account_number":"123456","swift_code":"DBBLBDDH102"}'
 ```
 
 > The above command returns JSON structured like this:
@@ -88,8 +85,8 @@ added as recipients for the user.
 Parameter | Type | Description
 --------- | ---- | -----------
 first_name | string (64) | First names of the user (needs to be in CAPITALS for the juristic person)
-middle_name | string (64) | Middle name of the user (needs to be in CAPITALS for the juristic person)
 last_name | string (64) | Surname of the user (needs to be in CAPITALS for the juristic person)
+destination_type | enum | bank / cashpoint / wallet
 account_number | integer | Account number of the recipient
 swift_code | string(16) | Swift Code for recipients bank
 store_id | integer | Store ID
@@ -101,10 +98,17 @@ Parameter | Type | Description
 --------- | ---- | -----------
 uuid | string (36) | UUID of the recipient
 first_name | string (64) | First names of the user (needs to be in CAPITALS for the juristic person)
-middle_name | string (64) | Middle name of the user (needs to be in CAPITALS for the juristic person)
 last_name | string (64) | Surname of the user (needs to be in CAPITALS for the juristic person)
 
-## Request Quote (before sending money)
+### Destination Types
+
+Value | Description
+----- | ----------
+bank  | Cash is sent to the recipients bank account
+cashpoint | Cash is collected from the specified cash point
+wallet | Money is transfered into the specified account at the specified wallet provider.
+
+## Request Quote
 
 ```shell
 curl -X POST "https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/quote"
@@ -119,20 +123,12 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/quote"
 {
   "status": "ok",
   "details": {
-    "quote": "e70c34d5-1a89-452f-b8b3-12be4c022ef0",
-    "send": {
-      "currency": "ZAR",
-      "amount": "5000"
-    },
-    "receive": {
-       "currency": "BDT",
-       "amount": "2906396"
-    }
+    "quote": "e70c34d5-1a89-452f-b8b3-12be4c022ef0"
   }
 }
 ```
 
-This endpoint is used to request a quotation to send forex to the specified recipient.
+This endpoint is used to request a quotation to send forex to the specified recipient.  The sender receives a SMS message with a Pay@ reference and the amount in the destination currency for the recipient.  The quote is valid for 6 hours.  The amount deposited via Pay@ needs to be the exact amount.
 
 ### HTTP Request
 
@@ -151,92 +147,4 @@ till_id | integer | Till Id (i.e. Lane 1 == Till 1)
 
 Parameter | Type | Description
 --------- | ---- | -----------
-quote | string (36) | UUID of the quote
-send.currency | string (3) | Currency code for currency sending from
-send.amount | integer | Amount in cents to quote on
-receive.currency | string (3) | Currency code for currency being sent to
-receive.amount | integer | Amount in cents to receive if quote accepted
-
-## Accept Quote (first confirmation)
-
-```shell
-curl -X POST "https://127.0.0.1.xip.io/api/v1/forex/deals/accept"
-  -H "Authorization: Token token=YOURTOKEN"
-  -H "Content-Type: application/json"
-  -d '{"mobile_number":"0801234567","quote":"c3d820ba-ac36-437d-b916-c1dc8833ad80","otp":"123456"}'
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "status": "ok",
-  "details": {
-    "uuid": "e70c34d5-1a89-452f-b8b3-12be4c022ef0"
-  }
-}
-```
-
-This endpoint accepts the quote.  Requires confirmation.
-
-### HTTP Request
-
-`POST https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/accept`
-
-### JSON Payload Parameters
-
-Parameter | Type | Description
---------- | ---- | -----------
-mobile_number | integer | Mobile Number of the Sender
-otp | string(6) | OTP that was sent to the customer to accept quote (before confirmation)
-quote | string(36) | UUID of the quotation
-store_id | integer | Store ID
-till_id | integer | Till Id (i.e. Lane 1 == Till 1)
-
-### Response Result Set
-
-Parameter | Type | Description
---------- | ---- | -----------
-uuid | string (36) | UUID of the accepted deal
-
-## Confirm Accept Quote (to actually send money)
-
-```shell
-curl -X POST "https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/accept"
-  -H "Authorization: Token token=YOURTOKEN"
-  -H "Content-Type: application/json"
-  -d '{"mobile_number":"0801234567","quote":"c3d820ba-ac36-437d-b916-c1dc8833ad80"}'
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "status": "ok",
-  "details": {
-    "uuid": "e70c34d5-1a89-452f-b8b3-12be4c022ef0"
-  }
-}
-```
-
-This endpoint confirms the acceptance of the quote and creates the forex deal and moves money for
-execution of the forex deal.
-
-### HTTP Request
-
-`POST https://127.0.0.1.xip.io/api/v1/users/<USER>/forex/deals/confirm`
-
-### JSON Payload Parameters
-
-Parameter | Type | Description
---------- | ---- | -----------
-mobile_number | integer | Mobile Number of the Sender
-quote | string(36) | UUID of the quotation
-store_id | integer | Store ID
-till_id | integer | Till Id (i.e. Lane 1 == Till 1)
-
-### Response Result Set
-
-Parameter | Type | Description
---------- | ---- | -----------
-uuid | string (36) | UUID of the accepted deal
+quote | string (36) | UUID of the request for quotation
