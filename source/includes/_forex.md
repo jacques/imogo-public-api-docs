@@ -12,8 +12,7 @@ curl -X GET "https://127.0.0.1.xip.io/api/v1/users/c3797604-6e78-486e-be5d-433f8
   -H "Content-Type: application/json"
 ```
 
-This endpoint retrieves a collection of recipients for sending forex to.  These users have been
-added as recipients for the user.
+This endpoint retrieves a collection of recipients for request a forex quote to send money to.  These users have been added as recipients for the user.
 
 ### HTTP Request
 
@@ -28,7 +27,6 @@ added as recipients for the user.
     {
       "uuid":"72d11c48-a565-4731-8915-462084ee0a9f",
       "first_name":"TIMOTHY",
-      "middle_name":"MICHAEL",
       "last_name":"COLMAN"
     }
   ]
@@ -48,7 +46,6 @@ Parameter | Type | Description
 --------- | ---- | -----------
 uuid | string (36) | UUID of the recipient
 first_name | string (64) | First names of the user (needs to be in CAPITALS for the juristic person)
-middle_name | string (64) | Middle name of the user (needs to be in CAPITALS for the juristic person)
 last_name | string (64) | Surname of the user (needs to be in CAPITALS for the juristic person)
 
 ## Create Forex Recipient
@@ -73,8 +70,7 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/users/<USERS>/forex/recipients"
 }
 ```
 
-This endpoint retrieves a collection of recipients for sending forex to.  These users have been
-added as recipients for the user.
+This endpoint retrieves a collection of recipients for requesting forex quotes for.  These users have been added as recipients for the user.
 
 ### HTTP Request
 
