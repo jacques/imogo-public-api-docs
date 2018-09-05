@@ -15,7 +15,6 @@ toc_footers:
 includes:
   - authentication
   - users
-  - bongotel
   - airtime
   - electricity
   - forex
