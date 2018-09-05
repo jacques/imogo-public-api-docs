@@ -25,10 +25,8 @@ search: true
 
 # Introduction
 
-Welcome to the BongoTel South Africa API!  You can use our API to maintain dialer users, topup the BongoTel balance, as well as maintain forex recipients and process forex payments.
+Welcome to the BongoTel South Africa API!  You can use our API to maintain users before they are FICA'd, vend airtime and prepaid electricity, as well as maintain forex recipients and request forex quotes.
 
-Three business accounts are provided to your profile:
+One business accounts are provided to your profile:
 
  - Airtime Vending
- - Forex Vending
- - Forex Commission
