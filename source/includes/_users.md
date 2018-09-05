@@ -22,9 +22,7 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/users"
 ```
 
 This endpoint creates a new customer on the BongoTel Platform.  During the
-registration process a wallet is issued to the customer and BongoTel dialer
-account is created for the customer.  The customer is setup for R 5000/day /
-R 25000/month to send forex home with BongoTel as part of Exemption 17.
+registration process a wallet is issued to the customer.
 
 ### HTTP Request
 
