@@ -1,5 +1,5 @@
 ---
-title: BongoTel Public API Reference
+title: IMOGO Public API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -10,14 +10,11 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
-  - <a href='https://thebongo.zone/'>BongoTel</a>
+  - <a href='https://secure.imogo.co.za/'>IMOGO</a>
 
 includes:
   - authentication
-  - users
-  - airtime
-  - electricity
-  - forex
+  - billpayments
   - errors
 
 search: true
@@ -25,8 +22,8 @@ search: true
 
 # Introduction
 
-Welcome to the BongoTel South Africa API!  You can use our API to maintain users before they are FICA'd, vend airtime and prepaid electricity, as well as maintain forex recipients and request forex quotes.
+Welcome to the IMOGO API!  You can use our API to perform Bill Payments.
 
 One business accounts are provided to your profile:
 
- - Airtime Vending
+ - Bill Payments
