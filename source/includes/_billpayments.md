@@ -67,10 +67,10 @@ details.type | enum | fixed or variable for expected payment type
 details.min_amount | integer | minimum amount to be allowed to tender to pay a bill
 details.max_amount | integer | maximum amount to be allowed to tender to pay a bill
 
-## Process payment against an IMOGO Pay Now Code
+## Authorise payment against an IMOGO Pay Now Code
 
 ```shell
-curl -X POST "https://127.0.0.1.xip.io/api/v1/billpayments/12345678901/process"
+curl -X POST "https://127.0.0.1.xip.io/api/v1/billpayments/12345678901/authorise"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
   -d '{"amount":"500","store_id":"12345678901","till_id":"1"}'
@@ -92,6 +92,12 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/billpayments/12345678901/process"
   }
 }
 ```
+
+As a retailer you need to ensure that your stores have funds available before you
+authorise a bill payment as been collected as part of your business rules applied
+to transactions from stores.
+
+Ensure that the store has sufficient funds per your risk process.
 
 ### HTTP Request
 
