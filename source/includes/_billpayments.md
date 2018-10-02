@@ -90,7 +90,11 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/billpayments/12345678901/confirmid
       "last_name": "Colman"
     },
     "account_number":"12345678901",
-    "amount": 50000
+    "amount": 50000,
+    "photo": {
+      "data": "base64 encoded string",
+      "mime_type": "image/png"
+    }
   }
 }
 ```
