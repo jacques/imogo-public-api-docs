@@ -55,5 +55,5 @@ You must replace <code>YOURTOKEN</code> with your program API key.
 </aside>
 
 <aside class="notice">
-Please do not share your Plutus Platform credentials as they unlock sensitive resources, such as transaction histories for your customers and can perform instructions your apps receive on behalf of a customer such as making payments.
+Please do not share your Plutus Platform credentials as they unlock sensitive resources, such as processing bill payments.
 </aside>
