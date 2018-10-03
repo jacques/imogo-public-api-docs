@@ -75,7 +75,7 @@ details.photo.mime_type | string | mime type of the photo
 curl -X POST "https://127.0.0.1.xip.io/api/v1/billpayments/12345678901/confirmid"
   -H "Authorization: Token token=YOURTOKEN"
   -H "Content-Type: application/json"
-  -d '{"id_document_number":"ZAFCPT00123456","store_id":"12345678901","till_id":"1"}'
+  -d '{"id_type":"zaasylum","id_document_number":"ZAFCPT00123456","store_id":"12345678901","till_id":"1"}'
 ```
 
 > The above command returns JSON structured like this:
@@ -114,6 +114,26 @@ Parameter | Description
 --------- | -----------
 CODE | IMOGO Pay Now Code
 
+### JSON Payload Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+id_type | enum | zaid / passport / zaasylum
+id_document_type | string | identification number for specified string
+store_id | integer | Store ID
+till_id | integer | Till Id (i.e. Lane 1 == Till 1)
+
+### Response Result Set
+
+Parameter | Type | Description
+--------- | ---- | -----------
+status | enum | ok or error
+details.uuid | string (36) | UUID of IMOGO Pay Now Order
+details.customer.first_name | string(64) | First Name(s) of the Customer
+details.customer.last_name | string(64) | Surname of the Customer
+details.account_number | integer | IMOGO Pay Now Code
+details.amount | integer | Amount in cents paid against the bill payment
+
 ## Authorise payment against an IMOGO Pay Now Code
 
 ```shell
@@ -148,7 +168,7 @@ Ensure that the store has sufficient funds per your risk process.
 
 ### HTTP Request
 
-`POST https://127.0.0.1.xip.io/api/v1/billpayments/<CODE>/process`
+`POST https://127.0.0.1.xip.io/api/v1/billpayments/<CODE>/authorise`
 
 ### URL Parameters
 
