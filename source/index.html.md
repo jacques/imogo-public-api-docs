@@ -27,3 +27,14 @@ Welcome to the IMOGO API!  You can use our API to perform Bill Payments.
 One business accounts are provided to your profile:
 
  - Bill Payments
+
+# Environments
+
+IMOGO runs the platform in multiple environments.  These includes production and staging.
+
+## Hostnames
+
+Environment | Hostname
+----------- | --------
+staging     | secure.ogomi.co.za
+production  | secure.imogo.co.za
