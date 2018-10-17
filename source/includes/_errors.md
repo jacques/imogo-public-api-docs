@@ -14,6 +14,6 @@ Error Code | Meaning
 429 | Too Many Requests -- You are hitting the rate limiter.
 500 | Internal Server Error -- We had a problem with our server. Try again later.
 503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
-504 | Gateway Timeout -- We're temporarily having issues with either with the load blancer or application reverse proxy.  May occur when we are having issues with our upstream services.
+504 | Gateway Timeout -- We're temporarily having issues with either with the load blancer or application reverse proxy.  May occur when we are having issues with our upstream service providers when vending pinless airtime.
 
 Note: Nginx (the webserver we use for load balancing and reverse proxying uses a HTTP 504 status code.  It also returns a HTML body).
