@@ -28,11 +28,11 @@ One business accounts are provided to your profile:
 
  - Bill Payments
 
-# Environments
+## Environments
 
 IMOGO runs the platform in multiple environments.  These includes production and staging.
 
-## Hostnames
+### Hostnames
 
 Environment | Hostname
 ----------- | --------
