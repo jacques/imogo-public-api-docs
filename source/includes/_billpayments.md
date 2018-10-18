@@ -30,6 +30,48 @@ curl -X POST "https://127.0.0.1.xip.io/api/v1/billpayments/12345678901/verify"
 }
 ```
 
+> An example of an error response where a non-JSON formatted request arrives.
+
+```
+{
+  "status": "error",
+  "message": "Please ensure you are posting RAW json over."
+}
+```
+
+> An example of an error response where the JSON formatted request is malformed.
+
+```
+Please ensure you are posting valid JSON over.
+```
+
+> An example of an error response where the Pay Now Code has expired.
+
+```
+{
+  "status": "error",
+  "message": "Pay Now Code has expired"
+}
+```
+
+> An example of an error response where the merchant retreival number has already been processed.
+
+```
+{
+  "status": "error",
+  "message": "Merchant Retrieval Number has already been processed."
+}
+```
+
+> An example of an error response where the merchant / retailer has insufficient funds.
+
+```
+{
+  "status": "error",
+  "message": "Merchant has insufficient funds."
+}
+```
+
 This endpoint validates a IMOGO Pay Now Code against the IMOGO Platform.  This enables
 the Retailer to see if the amount is fixed or variable and what the minimum and maximum
 amount the Bill Issuer expects to be paid in.  It also lets the retailer know the name
