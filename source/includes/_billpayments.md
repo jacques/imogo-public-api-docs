@@ -223,6 +223,7 @@ CODE | IMOGO Pay Now Code
 Parameter | Type | Description
 --------- | ---- | -----------
 amount | integer | Amount in cents of the value being paid
+mrn | string(12) | Merchants Retrieval Reference Number (RRN)
 store_id | integer | Store ID
 till_id | integer | Till Id (i.e. Lane 1 == Till 1)
 
